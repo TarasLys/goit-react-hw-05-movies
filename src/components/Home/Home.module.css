@@ -6,9 +6,10 @@
   list-style-type: none;
 }
 
-/* .listDay>li:before {
+.listDay>li:before {
   content: "-   ";
-} */
+}
+
 
 .titleDay {
   margin-left: 150px;
