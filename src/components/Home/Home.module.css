@@ -1,0 +1,26 @@
+.listDay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 50px;
+  list-style-type: none;
+}
+
+/* .listDay>li:before {
+  content: "-   ";
+} */
+
+.titleDay {
+  margin-left: 150px;
+  margin-top: 50px;
+}
+
+.homeDiv {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  font-size: 40;
+  width: 80%;
+}

@@ -1,0 +1,26 @@
+.movies {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  font-size: 40;
+}
+
+.listMovies {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 50px;
+list-style-type: none;
+}
+
+.listMovies>li:before {
+    content: "-   ";
+    
+}
+
+.formMovies {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
