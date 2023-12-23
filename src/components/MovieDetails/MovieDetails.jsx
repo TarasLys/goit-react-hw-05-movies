@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Link, Route, Routes, useParams, Outlet } from 'react-router-dom';
-
 import axios from 'axios';
-import Cast from '../Cast';
-import Reviews from '../Reviews';
 import css from './MovieDetails.module.css';
+
+const Cast = lazy(() => import('../Cast/Cast'));
+const Reviews = lazy(() => import('../Reviews/Reviews'));
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
@@ -57,11 +57,13 @@ function MovieDetails() {
             </li>
           </ul>
           <hr />
-          <Outlet />
-          <Routes>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Routes>
+          <Suspense fallback={<div>Is Loading...</div>}>
+            <Outlet />
+            <Routes>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Routes>
+          </Suspense>
         </>
       )}
     </div>

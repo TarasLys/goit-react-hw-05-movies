@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import css from '../components/Cast.module.css';
+import css from '../Cast/Cast.module.css';
 import axios from 'axios';
 
 function Cast() {
