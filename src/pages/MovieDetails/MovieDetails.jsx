@@ -3,8 +3,8 @@ import { Link, Route, Routes, useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import css from './MovieDetails.module.css';
 
-const Cast = lazy(() => import('../Cast/Cast'));
-const Reviews = lazy(() => import('../Reviews/Reviews'));
+const Cast = lazy(() => import('../../components/Cast/Cast'));
+const Reviews = lazy(() => import('../../components/Reviews/Reviews'));
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);

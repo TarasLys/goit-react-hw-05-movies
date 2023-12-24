@@ -14,7 +14,7 @@
 
 
 .actorList img {
-  background: url('../images/person.png') no-repeat center center;
+  background: url('/src/images/person.png') no-repeat center center;
   background-size: cover;
   list-style-type: none;
 }
