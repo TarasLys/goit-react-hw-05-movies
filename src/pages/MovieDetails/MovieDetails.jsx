@@ -1,42 +1,29 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { Link, Route, Routes, useParams, Outlet } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
+import { GoBackBtn } from 'components/GoBackBtn/GoBackBtn';
 import css from './MovieDetails.module.css';
-
-const Cast = lazy(() => import('../../components/Cast/Cast'));
-const Reviews = lazy(() => import('../../components/Reviews/Reviews'));
+import { fetchMovie } from 'service/service';
 
 function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
 
   useEffect(() => {
-    const fetchMovie = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}`,
-        {
-          headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjY2IzYWZhYzhlOTMyOWI1YWJkMzVjNmRmMzY5MjUzZCIsInN1YiI6IjY1ODJmM2Y4ZTI5NWI0M2MwMDY4NjI0NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xgYP1rdb0GROreyEVhfVlLLdJA-VoS5Yhwr_rvgSydo',
-          },
-        }
-      );
-      setMovie(response.data);
-    };
-    fetchMovie();
+    async function getMovie() {
+      const movies = await fetchMovie(movieId);
+      setMovie(movies);
+    }
+    getMovie();
   }, [movieId]);
 
-  const handleGoBack = () => {
-    window.history.back();
-  };
+  const location = useLocation();
+  const path = useRef(location?.state?.from ?? '/');
 
   return (
     <div className={css.movieDetails}>
       {movie && (
         <>
-          <button className={css.decoreteButton} onClick={handleGoBack}>
-            Go back
-          </button>
+          <GoBackBtn path={path.current}>Go back</GoBackBtn>
           <h1>{movie.title}</h1>
           <img
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -57,13 +44,7 @@ function MovieDetails() {
             </li>
           </ul>
           <hr />
-          <Suspense fallback={<div>Is Loading...</div>}>
-            <Outlet />
-            <Routes>
-              <Route path="cast" element={<Cast />} />
-              <Route path="reviews" element={<Reviews />} />
-            </Routes>
-          </Suspense>
+          <Outlet />
         </>
       )}
     </div>
