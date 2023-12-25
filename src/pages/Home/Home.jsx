@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import css from './Home.module.css';
 import { fetchMoviesDay } from 'service/service';
 import MovieList from 'components/MovieList/MovieList';
